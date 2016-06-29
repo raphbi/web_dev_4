@@ -12,12 +12,12 @@ class UsersTable{
 
   public function __construct($username, $password, $database)
   {
-  
-  	
+
+
     $this->adapter = new Adapter(array(
 
-      "driver"    => "mysqli",
-      "hostname"  => "localhost",
+      "driver"    => "Pdo_mysql",
+      "hostname"  => "127.0.0.1",
       "port"      => "3306",
       "username"  => $username,
       "password"  => $password,
@@ -26,17 +26,17 @@ class UsersTable{
     ));
 
     $this->sql = new Sql($this->adapter);
-    
-  }	
+
+  }
 
 
   public function getAllUsers()
   {
-  
+
      $select = $this->sql->select()->from("USERS");
- 
+
      $query = $this->sql->buildSqlString($select);
- 
+
      return $this->adapter->query($query)->execute();
 
   }
